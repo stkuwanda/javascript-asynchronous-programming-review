@@ -7,4 +7,7 @@ function loadScript(src) {
 }
 
 loadScript('script.js');
-console.log('loading...'); // this runs before script finishes loading
+
+// these runs before script finishes loading
+console.log('loading...');
+newFunction(); // fails because browser hasn't finished loading the script where the func is declared
