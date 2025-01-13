@@ -8,7 +8,7 @@ function loadScript(src, callback) {
 	};
 
 	scriptElement.onerror = function () {
-		callback(new Error('Script load error for source: ${src}'));
+		callback(new Error(`Script load error for source: ${src}`));
 	};
 
 	document.body.append(scriptElement);
