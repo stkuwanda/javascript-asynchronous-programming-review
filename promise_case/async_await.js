@@ -5,15 +5,26 @@ async function hello() {
 	return 'A message';
 }
 
-async function act() {
-	
-}
+async function act() {}
 
 const sing = async function () {
 	return 'Sing';
 };
 
 // returns a fulfilled Promise effectively behaving like Promise.resolve('A message');
-// hello(); 
-// sing(); 
+// hello();
+// sing();
 // act();
+
+// async funcs in the context of settled rejected Promises
+async function run() {
+	throw 'An error happened!';
+}
+
+async function test() {
+  throw new Error('Something has gone wrong!');
+}
+
+// returns a rejected Promise effectively behaving like Promise.reject('Rejection message');
+// run();
+// test();
