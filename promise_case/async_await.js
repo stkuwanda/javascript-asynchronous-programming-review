@@ -42,3 +42,29 @@ login('simba', 'password!')
 	.catch((err) => {
 		console.log(err.message);
 	});
+
+// Sequential processing of a collection of Promises using for await of loop
+function delay(ms) {
+	return new Promise((resolve) => setTimeout(() => resolve(ms), ms));
+}
+
+const createDelays = [1000, 2000, 500, 3000, 5000, 10000, 100].map((ms) =>
+	delay(ms)
+); // array of Promises
+
+async function processDelays() {
+	// old method of sequential processing of an asynchronous iterable (iterable of asynchronous object aka Promises)
+	// for (const delayTime of createDelays) {
+	// 	const value = await delayTime;
+	// 	console.log(`Waited for ${value} milliseconds.`);
+	// }
+
+	// new syntax of sequential processing of an asynchronous iterable (iterable of asynchronous object aka Promises)
+	for await (const delayTime of createDelays) {
+		console.log(`Waited for ${delayTime} milliseconds.`);
+	}
+
+	console.log('All delays have been processed.');
+}
+
+processDelays();
