@@ -22,9 +22,23 @@ async function run() {
 }
 
 async function test() {
-  throw new Error('Something has gone wrong!');
+	throw new Error('Something has gone wrong!');
 }
 
 // returns a rejected Promise effectively behaving like Promise.reject('Rejection message');
 // run();
 // test();
+
+async function login(username, password) {
+	if (!username || !password) throw 'Missing credentials!';
+	if (password === 'password!') return 'Access granted!';
+	throw new Error('Type in password!');
+}
+
+login('simba', 'password!')
+	.then(function (result) {
+		console.log(result);
+	})
+	.catch((err) => {
+		console.log(err.message);
+	});
