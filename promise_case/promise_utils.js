@@ -18,7 +18,7 @@ const promise3 = new Promise(function (resolve, reject) {
 
 const promise4 = new Promise(function (resolve, reject) {
 	setTimeout(function () {
-		reject('Operation completed in half a second.');
+		reject('Error occurred in half a second.');
 	}, 500);
 });
 
@@ -44,20 +44,20 @@ Promise.all(promises)
 });
 
 // settles and returns a collection of resolved values only when all promises in the collection 
-// are resolved and not rejected, otherwise throws an error
+// are fulfilled and not rejected, otherwise throws an error
 Promise.all(promises2)
 .catch(function (error) {
   console.log('One or more promises failed in the collection promises2.');
 });
 
 // settles and returns an array of objects only when all promises in the collection are 
-// settled(whether resolved or rejected), otherwise throws error
+// settled(whether fulfilled or rejected), otherwise throws error
 Promise.allSettled(promises2)
 .then(function (value) {
   console.log(value);
 });
 
-// returns first value to settle by resolving, and ignores any subsequent settlements.
+// returns first value to settle by fulfilling, and ignores any subsequent settlements.
 // returns error if no resolved settlements occur from the processed collection of promises
 Promise.any(promises2)
 .then(function (value) {
