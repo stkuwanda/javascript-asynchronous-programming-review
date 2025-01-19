@@ -1,0 +1,60 @@
+1. Password encrytion
+the manager is from a non-technical domain. he has given you a hash that was
+generated using bcrypt library. You need to get the value that was hashed. how could you
+achieve this?
+
+solution: Recovering the original value from a bcrypt hash is, by design, not feasible. Bcrypt is 
+created to be a one-way hashing algorithm, making it secure by ensuring that hashed values cannot 
+be reverted to their original form. This property is key in protecting sensitive data like passwords.
+
+2. Package Management
+checking the dependency graph of a NodeJs project using npm, you notice a peer dependency
+of a package has been marked as deduped by npm. what do you infer from this dedupe-flagged
+peer dependency and do you need to do anything to remove the dedupe flag from the peer dependency?
+
+solution: When npm marks a peer dependency as deduped, it means that npm has detected that the same package 
+is being installed multiple times in different parts of the dependency tree and has consolidated them into a 
+single instance to avoid duplication. This helps to keep the overall structure of the node_modules directory 
+cleaner and more efficient1. You don't need to do anything to remove the dedupe flag from the peer dependency. 
+It's a normal part of npm's deduplication process and is handled automatically by npm1. The dedupe flag is 
+simply an internal marker used by npm to indicate that it has performed this optimization
+
+3. child_process module
+the exec() method in the child_process module of Node.js runs a command in a shell and buffers the output. 
+Here's a brief explanation of how it works: When you use the exec() method, it spawns a new shell to execute the
+given command and collects the output (both stdout and stderr) into buffers. Once the command has completed, the 
+output is returned to the callback function provided to exec()
+the exec() method waits for the process to end and tries to return the last buffered data immediately.
+the exec() method returns a buffer with MAX_SIZE allocated if the size parameter was not specified.
+
+The exec() method in the child_process module of Node.js does not replace the existing process. Instead, it spawns
+a new shell to execute the command, collects the output, and provides it to the callback function once the command completes. 
+The exec(3) POSIX system call, on the other hand, replaces the current process with a new process. This means the calling
+process is replaced with the new process image, and the new process takes over the process ID of the original process. 
+In contrast, the child_process.exec() method in Node.jscreates a child process that runs alongside the parent process 
+without replacing it. This allows the parent process to continue running and manage multiple child processes as needed.
+
+6. Cluster module
+The cluster module in Node.jsis designed to take advantage of multi-core systems by allowing the creation of multiple child processes (also known as workers) that can share the same server port. Each worker runs in its own process, but they all listen to the same port. This way, you can distribute incoming connections across multiple processes, which can improve the performance and reliability of your application.
+
+Child processes in a Node.js cluster can communicate with the parent process using Inter-Process Communication (IPC). This communication is facilitated by message passing through a built-in messaging system.
+
+Workers in clusters are separate processes and can be killed or re-spawned without affecting other workers.
+
+The cluster module in Node.jsenables you to create multiple instances of your application that can run on different CPU cores. Each instance, or worker, is a separate Node.jsprocess that shares the same server port and can handle incoming requests. This way, you can distribute the workload among these processes, effectively utilizing multiple CPU cores.
+
+By default, Node.js runs in a single thread, which means it can only handle one operation at a time. However, by using the cluster module, you can create a master process and multiple worker processes. The master process distributes incoming connections among the workers, allowing your application to handle multiple requests concurrently
+
+16. Native Objects vs Host Objects
+Native objects are defined by the ECMAScript specification and provide foundational capabilities that developers use to build more complex functionality. They are distinct from host objects, which are provided by the environment (like the browser or Node.js).
+
+17. Pure functions
+Pure functions are those that do not have side effects and impure functions are those that can cause side effects.
+Not all asynchronous functions in JavaScript are inherently impure, but many of them tend to be because they often involve operations that interact with external systems or state, such as making network requests, reading from or writing to a database, or interacting with the file system.
+
+Pure functions are deterministic, and impure functions are non-deterministic.
+Deterministic: Given the same inputs, pure functions will always produce the same outputs. This predictable behavior is a hallmark of purity.
+No Side Effects: They don't modify any external state or rely on anything other than their input parameters.
+
+18. Object immutability
+Object.freeze() is a method in JavaScript that makes an object immutable. When an object is frozen, you cannot add, remove, or change its properties. Fails silently in non-strict mode, throws an error in strict mode.
